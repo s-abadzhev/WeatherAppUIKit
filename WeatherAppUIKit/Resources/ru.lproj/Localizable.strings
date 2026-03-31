@@ -1,0 +1,20 @@
+// Common
+"common.retry" = "Повторить";
+
+// Weather UI
+"weather.hourlyForecast" = "ПОЧАСОВОЙ ПРОГНОЗ";
+"weather.dailyForecast" = "ПРОГНОЗ НА 3 ДНЯ";
+"weather.feelsLike" = "ОЩУЩАЕТСЯ КАК";
+"weather.humidity" = "ВЛАЖНОСТЬ";
+"weather.wind" = "ВЕТЕР";
+"weather.now" = "Сейчас";
+"weather.hiLo" = "Макс.: %d°, мин.: %d°";
+"weather.windSpeed" = "%d км/ч";
+"weather.loadingError" = "Не удалось загрузить погоду\n%@";
+
+// Errors
+"error.invalidURL" = "Неверный URL запроса";
+"error.noInternet" = "Нет интернет-соединения. Проверьте подключение";
+"error.timeout" = "Превышено время ожидания. Проверьте интернет-соединение";
+"error.decoding" = "Ошибка обработки данных";
+"error.server" = "Ошибка сервера (%d)";

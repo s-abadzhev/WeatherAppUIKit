@@ -1,0 +1,20 @@
+// Common
+"common.retry" = "Retry";
+
+// Weather UI
+"weather.hourlyForecast" = "HOURLY FORECAST";
+"weather.dailyForecast" = "3-DAY FORECAST";
+"weather.feelsLike" = "FEELS LIKE";
+"weather.humidity" = "HUMIDITY";
+"weather.wind" = "WIND";
+"weather.now" = "Now";
+"weather.hiLo" = "H: %d°  L: %d°";
+"weather.windSpeed" = "%d km/h";
+"weather.loadingError" = "Failed to load weather\n%@";
+
+// Errors
+"error.invalidURL" = "Invalid request URL";
+"error.noInternet" = "No internet connection. Check your network";
+"error.timeout" = "Request timed out. Check your connection";
+"error.decoding" = "Failed to process data";
+"error.server" = "Server error (%d)";
