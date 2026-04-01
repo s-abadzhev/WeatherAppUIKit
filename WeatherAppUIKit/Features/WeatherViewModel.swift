@@ -62,6 +62,8 @@ final class WeatherViewModel {
     private var lastCoordinate: CLLocationCoordinate2D?
     private static let totalTimeout: TimeInterval = 20
 
+    private var fetchTask: Task<Void, Never>?
+
     init(locationService: LocationServiceProtocol,
          weatherRepository: WeatherRepositoryProtocol) {
         self.locationService = locationService
@@ -88,8 +90,8 @@ final class WeatherViewModel {
 
     private func fetchWeather(for coordinate: CLLocationCoordinate2D) {
         if case .error = state { state = .loading }
-
-        Task {
+        fetchTask?.cancel()
+        fetchTask = Task {
             do {
                 let (current, forecast) = try await withTimeout(seconds: Self.totalTimeout) {
                     async let currentTask = self.weatherRepository.fetchCurrent(
