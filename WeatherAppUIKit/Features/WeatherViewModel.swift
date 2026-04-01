@@ -224,4 +224,8 @@ final class WeatherViewModel {
         guard let date = Self.dateParser.date(from: dateString) else { return dateString }
         return Self.dayNameFormatter.string(from: date).capitalized
     }
+
+    deinit {
+        locationService.stopMonitoring()
+    }
 }
