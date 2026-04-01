@@ -206,14 +206,22 @@ final class WeatherViewModel {
         return parts.count > 1 ? String(parts[1].prefix(5)) : time
     }
 
+    private static let dateParser: DateFormatter = {
+        let f = DateFormatter()
+        f.dateFormat = "yyyy-MM-dd"
+        f.locale = Locale(identifier: "en_US_POSIX")
+        return f
+    }()
+
+    private static let dayNameFormatter: DateFormatter = {
+        let f = DateFormatter()
+        f.locale = Locale.current
+        f.dateFormat = "EE"
+        return f
+    }()
+
     private func formatDayName(_ dateString: String) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        guard let date = formatter.date(from: dateString) else { return dateString }
-        let dayFormatter = DateFormatter()
-        dayFormatter.locale = Locale.current
-        dayFormatter.dateFormat = "EE"
-        return dayFormatter.string(from: date).capitalized
+        guard let date = Self.dateParser.date(from: dateString) else { return dateString }
+        return Self.dayNameFormatter.string(from: date).capitalized
     }
 }
