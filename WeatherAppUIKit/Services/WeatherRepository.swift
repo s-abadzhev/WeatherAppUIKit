@@ -23,9 +23,3 @@ final class WeatherRepository: WeatherRepositoryProtocol {
         try await networkClient.request(.forecast(lat: lat, lon: lon))
     }
 }
-
-enum WeatherError: LocalizedError {
-    case timeout
-
-    var errorDescription: String? { L10n.Error.timeout }
-}
