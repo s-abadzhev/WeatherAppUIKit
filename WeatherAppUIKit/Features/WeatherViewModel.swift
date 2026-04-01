@@ -35,16 +35,10 @@ final class WeatherViewModel {
     }
 
     private func setupLocationMonitoring() {
-        Task {
-            let coordinate = await locationService.requestLocation()
-            self.lastCoordinate = coordinate
-            self.fetchWeather(for: coordinate)
-            locationService.startMonitoring()
-            locationService.onLocationUpdated = { [weak self] coordinate in
-                self?.fetchWeather(for: coordinate)
-                self?.lastCoordinate = coordinate
-            }
-        }
+        locationService.requestLocation(onUpdate: {[weak self] coordinate in
+            self?.lastCoordinate = coordinate
+            self?.fetchWeather(for: coordinate)
+        })
     }
 
     func retry() {
@@ -75,6 +69,8 @@ final class WeatherViewModel {
                 state = .error(WeatherError.timeout.localizedDescription)
             } catch let urlError as URLError where urlError.code == .timedOut {
                 state = .error(WeatherError.timeout.localizedDescription)
+            } catch is CancellationError {
+                // Не реагируем на ошибку, если отменили задачу
             } catch {
                 state = .error(error.localizedDescription)
             }

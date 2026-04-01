@@ -8,9 +8,7 @@
 import CoreLocation
 
 protocol LocationServiceProtocol: AnyObject {
-    var onLocationUpdated: ((CLLocationCoordinate2D) -> Void)? { get set }
-    func requestLocation() async -> CLLocationCoordinate2D
-    func startMonitoring()
+    func requestLocation(onUpdate: @escaping (CLLocationCoordinate2D) -> Void)
     func stopMonitoring()
     var defaultLocation: CLLocationCoordinate2D { get }
 }

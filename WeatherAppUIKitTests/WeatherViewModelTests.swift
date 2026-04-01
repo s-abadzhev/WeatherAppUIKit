@@ -175,13 +175,12 @@ struct WeatherViewModelTests {
 
     // MARK: - Location Monitoring
 
-    @Test("startMonitoring is called on the location service after first fetch")
-    func startMonitoringCalled() async {
+    @Test("requestLocation is called when ViewModel is initialized")
+    func requestLocationCalledOnInit() {
         let locationService = MockLocationService()
-        let vm = WeatherViewModel(locationService: locationService,
-                                  weatherRepository: MockWeatherRepository())
-        _ = await awaitNonLoadingState(vm)
-        #expect(locationService.startMonitoringCalled)
+        _ = WeatherViewModel(locationService: locationService,
+                             weatherRepository: MockWeatherRepository())
+        #expect(locationService.requestLocationCalled)
     }
 
     @Test("Location update triggers a new fetch")
@@ -192,7 +191,7 @@ struct WeatherViewModelTests {
         _ = await awaitNonLoadingState(vm)
         let callsBefore = repo.fetchCurrentCallCount
 
-        locationService.onLocationUpdated?(CLLocationCoordinate2D(latitude: 48.8566, longitude: 2.3522))
+        locationService.simulateLocationUpdate(CLLocationCoordinate2D(latitude: 48.8566, longitude: 2.3522))
         await yield()
 
         #expect(repo.fetchCurrentCallCount > callsBefore)
@@ -206,7 +205,7 @@ struct WeatherViewModelTests {
         _ = await awaitNonLoadingState(vm)
 
         let paris = CLLocationCoordinate2D(latitude: 48.8566, longitude: 2.3522)
-        locationService.onLocationUpdated?(paris)
+        locationService.simulateLocationUpdate(paris)
         await yield()
 
         #expect(repo.lastLat == paris.latitude)
