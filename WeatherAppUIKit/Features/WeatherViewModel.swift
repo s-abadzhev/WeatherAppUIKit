@@ -187,6 +187,8 @@ final class WeatherViewModel {
     }
 
     deinit {
-        locationService.stopMonitoring()
+        Task { @MainActor [locationService] in
+            locationService.stopMonitoring()
+        }
     }
 }
