@@ -11,7 +11,7 @@ enum APIEndpoint: Sendable {
     case currentWeather(lat: Double, lon: Double)
     case forecast(lat: Double, lon: Double)
 
-    nonisolated var path: String {
+    var path: String {
         switch self {
         case .currentWeather:
             return "/current.json"
@@ -20,15 +20,15 @@ enum APIEndpoint: Sendable {
         }
     }
 
-    nonisolated private var baseURL: String {
+    private var baseURL: String {
         return "https://api.weatherapi.com/v1"
     }
 
-    nonisolated private var apiKey: String {
+    private var apiKey: String {
         return "fa8b3df74d4042b9aa7135114252304"
     }
 
-    nonisolated var queryItems: [URLQueryItem] {
+    var queryItems: [URLQueryItem] {
         switch self {
         case .currentWeather(let lat, let lon):
             return [
@@ -44,7 +44,7 @@ enum APIEndpoint: Sendable {
         }
     }
 
-    nonisolated var url: URL? {
+    var url: URL? {
         var components = URLComponents(string: baseURL + path)
         components?.queryItems = queryItems
         return components?.url
