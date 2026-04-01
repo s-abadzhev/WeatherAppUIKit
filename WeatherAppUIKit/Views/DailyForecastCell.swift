@@ -14,7 +14,7 @@ final class DailyForecastCell: UITableViewCell {
     private let dayLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .medium)
-        label.textColor = .white
+        label.textColor = AppColors.primaryText
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -22,7 +22,7 @@ final class DailyForecastCell: UITableViewCell {
     private let iconView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
-        iv.tintColor = .white
+        iv.tintColor = AppColors.primaryText
         iv.preferredSymbolConfiguration = UIImage.SymbolConfiguration(pointSize: 20)
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
@@ -31,7 +31,7 @@ final class DailyForecastCell: UITableViewCell {
     private let lowLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .regular)
-        label.textColor = UIColor.white.withAlphaComponent(0.6)
+        label.textColor = AppColors.tertiaryText
         label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -40,7 +40,7 @@ final class DailyForecastCell: UITableViewCell {
     private let highLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .medium)
-        label.textColor = .white
+        label.textColor = AppColors.primaryText
         label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -48,7 +48,7 @@ final class DailyForecastCell: UITableViewCell {
 
     private let tempBar: UIView = {
         let v = UIView()
-        v.backgroundColor = UIColor.white.withAlphaComponent(0.2)
+        v.backgroundColor = AppColors.tempBarTrack
         v.layer.cornerRadius = 3
         v.translatesAutoresizingMaskIntoConstraints = false
         return v
@@ -146,12 +146,7 @@ final class DailyForecastCell: UITableViewCell {
             gradient.frame = tempFill.bounds
         } else {
             let gradient = CAGradientLayer()
-            gradient.colors = [
-                UIColor.systemBlue.cgColor,
-                UIColor.systemGreen.cgColor,
-                UIColor.systemYellow.cgColor,
-                UIColor.systemOrange.cgColor,
-            ]
+            gradient.colors = AppColors.tempGradient
             gradient.startPoint = CGPoint(x: 0, y: 0.5)
             gradient.endPoint = CGPoint(x: 1, y: 0.5)
             gradient.cornerRadius = 3

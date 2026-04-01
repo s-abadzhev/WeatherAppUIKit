@@ -23,9 +23,9 @@ final class WeatherViewController: UIViewController {
     private let gradientLayer: CAGradientLayer = {
         let layer = CAGradientLayer()
         layer.colors = [
-            UIColor(red: 0.15, green: 0.35, blue: 0.75, alpha: 1).cgColor,
-            UIColor(red: 0.30, green: 0.55, blue: 0.90, alpha: 1).cgColor,
-            UIColor(red: 0.45, green: 0.70, blue: 1.0, alpha: 1).cgColor,
+            AppColors.gradientTop.cgColor,
+            AppColors.gradientMid.cgColor,
+            AppColors.gradientBottom.cgColor,
         ]
         layer.locations = [0, 0.5, 1]
         return layer
@@ -49,7 +49,7 @@ final class WeatherViewController: UIViewController {
 
     private let loadingIndicator: UIActivityIndicatorView = {
         let ai = UIActivityIndicatorView(style: .large)
-        ai.color = .white
+        ai.color = AppColors.primaryText
         ai.translatesAutoresizingMaskIntoConstraints = false
         ai.hidesWhenStopped = true
         return ai
@@ -65,7 +65,7 @@ final class WeatherViewController: UIViewController {
     private let errorLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .medium)
-        label.textColor = .white
+        label.textColor = AppColors.primaryText
         label.textAlignment = .center
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -75,9 +75,9 @@ final class WeatherViewController: UIViewController {
     private let retryButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.setTitle(L10n.Common.retry, for: .normal)
-        btn.setTitleColor(.white, for: .normal)
+        btn.setTitleColor(AppColors.primaryText, for: .normal)
         btn.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
-        btn.backgroundColor = UIColor.white.withAlphaComponent(0.25)
+        btn.backgroundColor = AppColors.buttonBackground
         btn.layer.cornerRadius = 12
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
@@ -86,7 +86,7 @@ final class WeatherViewController: UIViewController {
     private let cityLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 32, weight: .medium)
-        label.textColor = .white
+        label.textColor = AppColors.primaryText
         label.textAlignment = .center
         return label
     }()
@@ -94,7 +94,7 @@ final class WeatherViewController: UIViewController {
     private let tempLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 80, weight: .thin)
-        label.textColor = .white
+        label.textColor = AppColors.primaryText
         label.textAlignment = .center
         return label
     }()
@@ -102,7 +102,7 @@ final class WeatherViewController: UIViewController {
     private let conditionLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18, weight: .medium)
-        label.textColor = .white
+        label.textColor = AppColors.primaryText
         label.textAlignment = .center
         return label
     }()
@@ -110,7 +110,7 @@ final class WeatherViewController: UIViewController {
     private let hiLoLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18, weight: .medium)
-        label.textColor = .white
+        label.textColor = AppColors.primaryText
         label.textAlignment = .center
         return label
     }()
@@ -135,7 +135,7 @@ final class WeatherViewController: UIViewController {
     private let hourlyTitleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13, weight: .medium)
-        label.textColor = UIColor.white.withAlphaComponent(0.7)
+        label.textColor = AppColors.secondaryText
         label.text = L10n.Weather.hourlyForecast
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -143,7 +143,7 @@ final class WeatherViewController: UIViewController {
 
     private let hourlySeparator: UIView = {
         let v = UIView()
-        v.backgroundColor = UIColor.white.withAlphaComponent(0.3)
+        v.backgroundColor = AppColors.separator
         v.translatesAutoresizingMaskIntoConstraints = false
         return v
     }()
@@ -153,7 +153,7 @@ final class WeatherViewController: UIViewController {
     private lazy var dailyTable: UITableView = {
         let tv = UITableView(frame: .zero, style: .plain)
         tv.backgroundColor = .clear
-        tv.separatorColor = UIColor.white.withAlphaComponent(0.2)
+        tv.separatorColor = AppColors.tempBarTrack
         tv.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         tv.isScrollEnabled = false
         tv.register(DailyForecastCell.self, forCellReuseIdentifier: DailyForecastCell.reuseID)
@@ -165,7 +165,7 @@ final class WeatherViewController: UIViewController {
     private let dailyTitleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13, weight: .medium)
-        label.textColor = UIColor.white.withAlphaComponent(0.7)
+        label.textColor = AppColors.secondaryText
         label.text = L10n.Weather.dailyForecast
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -173,7 +173,7 @@ final class WeatherViewController: UIViewController {
 
     private let dailySeparator: UIView = {
         let v = UIView()
-        v.backgroundColor = UIColor.white.withAlphaComponent(0.3)
+        v.backgroundColor = AppColors.separator
         v.translatesAutoresizingMaskIntoConstraints = false
         return v
     }()
@@ -183,7 +183,7 @@ final class WeatherViewController: UIViewController {
     private let feelsLikeTitleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13, weight: .medium)
-        label.textColor = UIColor.white.withAlphaComponent(0.7)
+        label.textColor = AppColors.secondaryText
         label.text = L10n.Weather.feelsLike
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -192,7 +192,7 @@ final class WeatherViewController: UIViewController {
     private let feelsLikeValueLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 36, weight: .medium)
-        label.textColor = .white
+        label.textColor = AppColors.primaryText
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -202,7 +202,7 @@ final class WeatherViewController: UIViewController {
     private let humidityTitleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13, weight: .medium)
-        label.textColor = UIColor.white.withAlphaComponent(0.7)
+        label.textColor = AppColors.secondaryText
         label.text = L10n.Weather.humidity
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -211,7 +211,7 @@ final class WeatherViewController: UIViewController {
     private let humidityValueLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 36, weight: .medium)
-        label.textColor = .white
+        label.textColor = AppColors.primaryText
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -221,7 +221,7 @@ final class WeatherViewController: UIViewController {
     private let windTitleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13, weight: .medium)
-        label.textColor = UIColor.white.withAlphaComponent(0.7)
+        label.textColor = AppColors.secondaryText
         label.text = L10n.Weather.wind
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -230,7 +230,7 @@ final class WeatherViewController: UIViewController {
     private let windValueLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 36, weight: .medium)
-        label.textColor = .white
+        label.textColor = AppColors.primaryText
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

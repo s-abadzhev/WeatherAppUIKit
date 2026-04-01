@@ -14,7 +14,7 @@ final class HourlyForecastCell: UICollectionViewCell {
     private let timeLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .medium)
-        label.textColor = .white
+        label.textColor = AppColors.primaryText
         label.textAlignment = .center
         return label
     }()
@@ -22,7 +22,7 @@ final class HourlyForecastCell: UICollectionViewCell {
     private let iconView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
-        iv.tintColor = .white
+        iv.tintColor = AppColors.primaryText
         iv.preferredSymbolConfiguration = UIImage.SymbolConfiguration(pointSize: 22)
         return iv
     }()
@@ -30,7 +30,7 @@ final class HourlyForecastCell: UICollectionViewCell {
     private let tempLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .semibold)
-        label.textColor = .white
+        label.textColor = AppColors.primaryText
         label.textAlignment = .center
         return label
     }()
