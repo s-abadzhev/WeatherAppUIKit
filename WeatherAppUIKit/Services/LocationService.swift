@@ -96,41 +96,36 @@ final class LocationService: NSObject, LocationServiceProtocol, CLLocationManage
 
     // MARK: - CLLocationManagerDelegate
 
-    nonisolated func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        MainActor.assumeIsolated {
-            guard let location = locations.last else {
-                if continuation != nil {
-                    resumeWithFallback()
-                }
-                return
-            }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else {
             if continuation != nil {
-                resumeWith(location.coordinate)
-            } else if isMonitoring {
-                onLocationUpdated?(location.coordinate)
-            }
-        }
-    }
-
-    nonisolated func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        MainActor.assumeIsolated {
-            guard continuation != nil else { return }
-            resumeWithFallback()
-        }
-    }
-
-    nonisolated func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        MainActor.assumeIsolated {
-            guard continuation != nil else { return }
-            let status = manager.authorizationStatus
-            switch status {
-            case .authorizedWhenInUse, .authorizedAlways:
-                manager.requestLocation()
-            case .denied, .restricted:
                 resumeWithFallback()
-            default:
-                break
             }
+            return
+        }
+        if continuation != nil {
+            resumeWith(location.coordinate)
+        } else if isMonitoring {
+            onLocationUpdated?(location.coordinate)
+        }
+
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        guard continuation != nil else { return }
+        resumeWithFallback()
+    }
+
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        guard continuation != nil else { return }
+        let status = manager.authorizationStatus
+        switch status {
+        case .authorizedWhenInUse, .authorizedAlways:
+            manager.requestLocation()
+        case .denied, .restricted:
+            resumeWithFallback()
+        default:
+            break
         }
     }
 }

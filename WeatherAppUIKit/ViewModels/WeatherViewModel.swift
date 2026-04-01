@@ -47,6 +47,7 @@ enum WeatherViewState {
 
 private struct TimeoutError: Error {}
 
+@MainActor
 final class WeatherViewModel {
 
     var onStateChanged: ((WeatherViewState) -> Void)?

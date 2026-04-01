@@ -9,6 +9,7 @@ import Testing
 import CoreLocation
 @testable import WeatherAppUIKit
 
+@MainActor
 @Suite("WeatherViewModel")
 struct WeatherViewModelTests {
 

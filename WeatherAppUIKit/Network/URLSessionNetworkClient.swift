@@ -9,16 +9,12 @@ import Foundation
 
 final class URLSessionNetworkClient: NetworkClient, @unchecked Sendable {
 
-    static let shared = URLSessionNetworkClient()
-
     private let session: URLSessionProtocol
     private let decoder: JSONDecoder
 
     init(session: URLSessionProtocol = URLSession.shared) {
         self.session = session
-
-        let decoder = JSONDecoder()
-        self.decoder = decoder
+        self.decoder = JSONDecoder()
     }
 
     func request<T: Decodable>(_ endpoint: APIEndpoint) async throws -> T {
@@ -40,8 +36,6 @@ final class URLSessionNetworkClient: NetworkClient, @unchecked Sendable {
             throw NetworkError.unknown(error)
         }
     }
-
-    // MARK: - Private
 
     private func validateResponse(_ response: URLResponse) throws {
         guard let httpResponse = response as? HTTPURLResponse else { return }
@@ -73,4 +67,3 @@ final class URLSessionNetworkClient: NetworkClient, @unchecked Sendable {
         }
     }
 }
-
